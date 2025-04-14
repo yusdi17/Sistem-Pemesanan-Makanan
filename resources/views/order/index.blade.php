@@ -14,11 +14,12 @@
 
 <body>
 
-    <!-- Makanan -->
+    <!-- Menu -->
+    @foreach ($categories as $category)
     <div class="container px-4 py-5">
-        <h2 class="pb-2 border-bottom">Menu</h2>
+        <h2 class="pb-2 border-bottom">{{ $category->name }}</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            @foreach ($products as $product)
+            @forelse ($category->products as $product)
                 <div class="col">
                     <div class="card shadow-sm">
                         @if ($product->image)
@@ -30,22 +31,25 @@
                             <p class="card-text">{{ $product->name }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"><i
-                                            class="fa-solid fa-cart-plus"></i></button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                    </button>
                                 </div>
-                                <small class="text-body-secondary">Rp
-                                    {{ number_format($product->price, 0, ',', '.') }}</small>
+                                <small class="text-body-secondary">Rp {{ number_format($product->price, 0, ',', '.') }}</small>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <p>Tidak ada produk dalam kategori ini.</p>
+            @endforelse
         </div>
     </div>
+@endforeach
+
 
     <!-- Footer -->
-    <div class="container bg-body-tertiary">
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top container">
+      <footer class="mt-auto d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top container bg-body-tertiary">
         <div class="col-md-4 d-flex align-items-center">
             <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2025 Yusdi Fathudin</span>
         </div>
@@ -73,7 +77,6 @@
             </li>
         </ul>
     </footer>
-    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
