@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CheckoutController;
 
 // Route::get('/', function () {
 //     return view('order.index');
@@ -22,5 +23,15 @@ require __DIR__.'/auth.php';
 
 Route::controller(OrderController::class)->group(function () {
     Route::get('/', 'index')->name('order.menu');
-    Route::get('/checkout', 'checkout')->name('checkout.checkout');
+    // Route::get('/checkout', 'create')->name('checkout.create');
+    // Route::post('/checkout', 'store')->name('checkout.store');
 });
+
+Route::controller(CheckoutController::class)->group(function () {
+    Route::get('/checkout', 'create')->name('checkout.create');
+    Route::post('/checkout', 'store')->name('checkout.store');
+    Route::post('/cart/add', 'add');
+    Route::get('/cart/data', 'getCart');
+    Route::post('/cart/remove','remove');
+});
+
