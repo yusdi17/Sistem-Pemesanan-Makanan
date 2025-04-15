@@ -44,6 +44,55 @@
             <h4 class="mb-3">Data Pemesan</h4>
             <form action="{{ route('checkout.store') }}" method="POST" class="needs-validation" novalidate>
                 @csrf
+
+                <div class="row g-3">
+                <div class="col-sm-12">
+                  <label for="firstName" class="form-label">Nama pemesan</label>
+                  <input type="text" class="form-control" id="firstName" placeholder="Masukkan nama anda" value="" required>
+                  <div class="invalid-feedback">
+                    Valid first name is required.
+                  </div>
+                </div>
+    
+                <div class="col-12">
+                  <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
+                  <input type="email" class="form-control" id="email" placeholder="contoh : you@gmail.com">
+                  <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label for="email" class="form-label">No WhatsApp <span class="text-body-secondary"></span></label>
+                  <input type="email" class="form-control" id="email" placeholder="Contoh : 082278907654">
+                  <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                  </div>
+                </div>
+    
+                <div class="col-12">
+                  <label for="address" class="form-label">Alamat</label>
+                  <input type="text" class="form-control" id="address" placeholder="Contoh : Dusun Durian Runtuh, RT01/RW02, Desa Manggis, Kecamatan Timun, Kabupaten Jeruk" required>
+                  <div class="invalid-feedback">
+                    Please enter your shipping address.
+                  </div>
+                </div>
+    
+              <div class="col-12 mb-3">
+                <label for="payment_method" class="form-label">Metode Pembayaran</label>
+                <select class="form-select" id="payment_method" name="payment_method" required>
+                  <option value="" selected disabled>Pilih metode pembayaran</option>
+                  <option value="bank_transfer">Transfer Bank</option>
+                  <option value="COD">Bayar di Tempat (COD)</option>
+                </select>
+                <div class="invalid-feedback">
+                  Silakan pilih metode pembayaran.
+                </div>
+              </div>
+              
+    
+              <hr class="my-4">
+
                 <!-- Form fields for customer data... -->
                 <button class="w-100 btn btn-primary btn-lg" type="submit">Lanjut Checkout</button>
             </form>
