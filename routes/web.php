@@ -21,5 +21,5 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::controller(OrderController::class)->group(function () {
-    Route::get('/', 'index')->name('order.index');
+    Route::get('/', 'index')->name('order.menu');
 });

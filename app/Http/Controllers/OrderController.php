@@ -14,7 +14,7 @@ class OrderController extends Controller
     public function index()
     {
         $categories = Category::with('products')->get();
-        return view('order.index', compact('categories'));
+        return view('order.menu', compact('categories'));
     }
 
     /**
