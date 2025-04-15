@@ -22,4 +22,5 @@ require __DIR__.'/auth.php';
 
 Route::controller(OrderController::class)->group(function () {
     Route::get('/', 'index')->name('order.menu');
+    Route::get('/checkout', 'checkout')->name('checkout.checkout');
 });

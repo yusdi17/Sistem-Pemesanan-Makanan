@@ -16,6 +16,10 @@ class OrderController extends Controller
         $categories = Category::with('products')->get();
         return view('order.menu', compact('categories'));
     }
+    public function checkout()
+    {
+        return view('checkout.checkout');
+    }
 
     /**
      * Show the form for creating a new resource.
