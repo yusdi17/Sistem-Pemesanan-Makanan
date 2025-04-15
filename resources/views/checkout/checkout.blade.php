@@ -93,7 +93,6 @@
     
               <hr class="my-4">
 
-                <!-- Form fields for customer data... -->
                 <button class="w-100 btn btn-primary btn-lg" type="submit">Lanjut Checkout</button>
             </form>
         </div>

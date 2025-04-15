@@ -53,6 +53,22 @@
             display: none;
             z-index: 1000;
         }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .bounce {
+            animation: bounce 0.4s ease;
+        }
     </style>
 
 </head>
@@ -68,17 +84,17 @@
     <!-- Floating Cart Icon -->
     @include('order.cart')
 
-<script>
-  function updateCartUI(cart) {
-    const cartItems = document.getElementById('cart-items');
-    const cartCount = document.getElementById('cart-count');
-    cartItems.innerHTML = '';
-    let totalQty = 0;
+    <script>
+        function updateCartUI(cart) {
+            const cartItems = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            cartItems.innerHTML = '';
+            let totalQty = 0;
 
-    for (const id in cart) {
-        const item = cart[id];
-        totalQty += item.quantity;
-        cartItems.innerHTML += `
+            for (const id in cart) {
+                const item = cart[id];
+                totalQty += item.quantity;
+                cartItems.innerHTML += `
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
                     ${item.name}
@@ -89,76 +105,119 @@
                 </button>
             </li>
         `;
-    }
-
-    cartCount.innerText = totalQty;
-}
-
-document.querySelectorAll('.add-to-cart').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const id = this.dataset.id;
-        const name = this.dataset.name;
-        const price = this.dataset.price;
-
-        fetch("/cart/add", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
-            },
-            body: JSON.stringify({
-                id,
-                name,
-                price
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.cart) {
-                updateCartUI(data.cart);
             }
-        });
-    });
-});
-function loadCartFromServer() {
-    fetch("/cart/data")
-        .then(res => res.json())
-        .then(data => {
-            if (data.cart) {
-                updateCartUI(data.cart);
-            }
-        });
-}
-function toggleCartDetails() {
-    const cartDetail = document.getElementById('cart-details');
-    if (cartDetail.style.display === 'none' || cartDetail.style.display === '') {
-        cartDetail.style.display = 'block';
-    } else {
-        cartDetail.style.display = 'none';
-    }
-}
-function removeFromCart(id) {
-    fetch("/cart/remove", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
-        },
-        body: JSON.stringify({ id })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.cart) {
-            updateCartUI(data.cart);
+
+            cartCount.innerText = totalQty;
+            cartCount.classList.add('bounce');
+            setTimeout(() => {
+                cartCount.classList.remove('bounce');
+            }, 400);
         }
-    });
-}
-loadCartFromServer();
 
-</script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const name = this.dataset.name;
+                const price = this.dataset.price;
+
+                fetch("/cart/add", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute("content")
+                        },
+                        body: JSON.stringify({
+                            id,
+                            name,
+                            price
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.cart) {
+                            updateCartUI(data.cart);
+                            showToast();
+                        }
+                    });
+            });
+        });
+
+        function loadCartFromServer() {
+            fetch("/cart/data")
+                .then(res => res.json())
+                .then(data => {
+                    if (data.cart) {
+                        updateCartUI(data.cart);
+                    }
+                });
+        }
+
+        function toggleCartDetails() {
+            const cartDetail = document.getElementById('cart-details');
+            if (cartDetail.style.display === 'none' || cartDetail.style.display === '') {
+                cartDetail.style.display = 'block';
+            } else {
+                cartDetail.style.display = 'none';
+            }
+        }
+
+        function removeFromCart(id) {
+            fetch("/cart/remove", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+                    },
+                    body: JSON.stringify({
+                        id
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.cart) {
+                        updateCartUI(data.cart);
+                    }
+                });
+        }
+        loadCartFromServer();
+
+        function showToast(message = 'Produk berhasil ditambahkan ke keranjang!') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            toast.style.opacity = '1';
+
+            setTimeout(() => {
+                toast.style.transition = 'opacity 0.5s ease';
+                toast.style.opacity = '0';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 500);
+            }, 2000);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
     </script>
+
+    <div id="toast"
+        style="
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 9999;
+    font-weight: bold;
+">
+        Produk berhasil ditambahkan ke keranjang!
+    </div>
+
 
 </body>
 
