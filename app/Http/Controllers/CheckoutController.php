@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Mail\InvoiceMail;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -30,7 +32,7 @@ class CheckoutController extends Controller
             'customer_address' => 'required|string',
             'payment_method' => 'required|in:bank_transfer,COD',
         ]);
-    
+
         $cart = session('cart', []);
         if (empty($cart)) {
             return redirect()->back()->with('error', 'Keranjang kosong!');
@@ -40,7 +42,7 @@ class CheckoutController extends Controller
         foreach ($cart as $item) {
             $totalAmount += $item['price'] * $item['quantity'];
         }
-    
+
         $order = Order::create([
             // 'user_id' => Auth::id(), // jika user login
             'customer_name' => $request->customer_name,
@@ -51,7 +53,7 @@ class CheckoutController extends Controller
             'payment_method' => $request->payment_method,
             'status' => 'pending',
         ]);
-    
+
         foreach ($cart as $productId => $item) {
             OrderItem::create([
                 'order_id' => $order->id,
@@ -60,10 +62,11 @@ class CheckoutController extends Controller
                 'price' => $item['price'],
             ]);
         }
-    
+
+        Mail::to($order->customer_email)->send(new InvoiceMail($order));
         // Bersihkan keranjang
         session()->forget('cart');
-    
+
         return redirect()->route('checkout.success')->with('success', 'Pesanan berhasil dibuat!');
     }
 
@@ -104,16 +107,14 @@ class CheckoutController extends Controller
     }
 
     public function remove(Request $request)
-{
-    $cart = session()->get('cart', []);
+    {
+        $cart = session()->get('cart', []);
 
-    unset($cart[$request->id]);
+        unset($cart[$request->id]);
 
-    session()->put('cart', $cart);
+        session()->put('cart', $cart);
 
-    return response()->json(['cart' => $cart]);
-
-}
-
+        return response()->json(['cart' => $cart]);
+    }
 
 }
