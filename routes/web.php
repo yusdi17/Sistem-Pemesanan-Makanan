@@ -35,3 +35,6 @@ Route::controller(CheckoutController::class)->group(function () {
     Route::post('/cart/remove','remove');
 });
 
+Route::get('/checkout-success', function () {
+    return view('checkout.success');
+})->name('checkout.success');

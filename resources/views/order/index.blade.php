@@ -182,7 +182,7 @@
         }
         loadCartFromServer();
 
-        function showToast(message = 'Produk berhasil ditambahkan ke keranjang!') {
+        function showToast(message = 'Produk berhasil ditambahkan!') {
             const toast = document.getElementById('toast');
             toast.textContent = message;
             toast.style.display = 'block';
@@ -215,7 +215,7 @@
     z-index: 9999;
     font-weight: bold;
 ">
-        Produk berhasil ditambahkan ke keranjang!
+        Produk berhasil ditambahkan!
     </div>
 
 

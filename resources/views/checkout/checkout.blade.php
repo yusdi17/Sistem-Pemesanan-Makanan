@@ -42,13 +42,13 @@
         {{-- FORM PEMESAN --}}
         <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Data Pemesan</h4>
-            <form action="{{ route('checkout.store') }}" method="POST" class="needs-validation" novalidate>
+            <form action="{{ route('checkout.store') }}" method="POST" class="needs-validation">
                 @csrf
 
                 <div class="row g-3">
                 <div class="col-sm-12">
-                  <label for="firstName" class="form-label">Nama pemesan</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="Masukkan nama anda" value="" required>
+                  <label for="name" class="form-label">Nama pemesan</label>
+                  <input type="text" name="customer_name" class="form-control" id="firstName" placeholder="Masukkan nama anda" value="" required>
                   <div class="invalid-feedback">
                     Valid first name is required.
                   </div>
@@ -56,15 +56,15 @@
     
                 <div class="col-12">
                   <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
-                  <input type="email" class="form-control" id="email" placeholder="contoh : you@gmail.com">
+                  <input type="email" name="customer_email" class="form-control" id="email" placeholder="contoh : you@gmail.com">
                   <div class="invalid-feedback">
                     Please enter a valid email address for shipping updates.
                   </div>
                 </div>
 
                 <div class="col-12">
-                  <label for="email" class="form-label">No WhatsApp <span class="text-body-secondary"></span></label>
-                  <input type="email" class="form-control" id="email" placeholder="Contoh : 082278907654">
+                  <label for="tel" class="form-label">No WhatsApp <span class="text-body-secondary"></span></label>
+                  <input type="tel" name="customer_phone" class="form-control" id="tel" placeholder="Contoh : 082278907654">
                   <div class="invalid-feedback">
                     Please enter a valid email address for shipping updates.
                   </div>
@@ -72,7 +72,7 @@
     
                 <div class="col-12">
                   <label for="address" class="form-label">Alamat</label>
-                  <input type="text" class="form-control" id="address" placeholder="Contoh : Dusun Durian Runtuh, RT01/RW02, Desa Manggis, Kecamatan Timun, Kabupaten Jeruk" required>
+                  <input type="text" name="customer_address" class="form-control" id="address" placeholder="Contoh : Dusun Durian Runtuh, RT01/RW02, Desa Manggis, Kecamatan Timun, Kabupaten Jeruk" required>
                   <div class="invalid-feedback">
                     Please enter your shipping address.
                   </div>
