@@ -10,7 +10,7 @@ use Filament\Forms\Components\Select;
 
 class LaporanPenjualan extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document';
 
     protected static string $view = 'filament.pages.laporan-penjualan';
 
