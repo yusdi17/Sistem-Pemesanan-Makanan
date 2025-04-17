@@ -43,7 +43,8 @@ class AdminPanelProvider extends PanelProvider
             ->navigationGroups([
                 'Master Data',
                 'Order',
-                'User Management'
+                'User Management',
+                'Report'
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -1,6 +1,8 @@
 <?php
 
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
+use App\Exports\LaporanPenjualanExport;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
@@ -38,3 +40,8 @@ Route::controller(CheckoutController::class)->group(function () {
 Route::get('/checkout-success', function () {
     return view('checkout.success');
 })->name('checkout.success');
+
+Route::get('/laporan/export', function () {
+    $periode = request()->get('periode', 'hari');
+    return Excel::download(new LaporanPenjualanExport($periode), 'laporan-penjualan.xlsx');
+})->name('laporan.export');

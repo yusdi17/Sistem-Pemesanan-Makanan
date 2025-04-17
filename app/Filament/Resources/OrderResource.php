@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Actions\ExportBulkAction;
 use App\Filament\Resources\OrderResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\OrderResource\RelationManagers;
@@ -73,6 +74,13 @@ class OrderResource extends Resource
                         'completed' => 'Completed',
                         'cancelled' => 'Cancelled',
                     ]),
+                Tables\Filters\Filter::make('created_today')
+                    ->label('Hari ini')
+                    ->query(fn($query) => $query->whereDate('created_at', now()->toDateString())),
+
+                Tables\Filters\Filter::make('created_this_week')
+                    ->label('Minggu ini')
+                    ->query(fn($query) => $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -80,6 +88,7 @@ class OrderResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make(),
                 ]),
             ]);
     }
