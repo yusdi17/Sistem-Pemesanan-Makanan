@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\OrderItem;
+use App\Mail\OrderStatusUpdated;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -33,5 +35,15 @@ class Order extends Model
         return $this->orderItems
             ->map(fn($item) => $item->product->name ?? 'N/A')
             ->join(', ');
+    }
+
+    protected static function booted(): void
+    {
+        static::updated(function ($order) {
+            if ($order->isDirty('status')) {
+                // notifikasi status
+                Mail::to($order->customer_email)->send(new OrderStatusUpdated($order));
+            }
+        });
     }
 }

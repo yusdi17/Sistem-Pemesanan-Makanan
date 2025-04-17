@@ -8,6 +8,8 @@ use App\Models\Order;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\OrderResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -20,12 +22,20 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Order';
+    protected static ?string $navigationLabel = 'Online Orders';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'completed' => 'Completed',
+                        'cancelled' => 'Cancelled',
+                    ])
+                    ->label('Order Status')
+                    ->required(),
             ]);
     }
 
@@ -34,24 +44,35 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                ->sortable(),
-            Tables\Columns\TextColumn::make('customer_name')
-                ->sortable(),
-            Tables\Columns\TextColumn::make('customer_email')
-                ->sortable(),
-            Tables\Columns\TextColumn::make('total_amount')
-                ->money('IDR')
-                ->sortable(),
-            Tables\Columns\TextColumn::make('product_names')
-                ->label('Product')
-                ->wrap()
-                ->sortable(false),
-            Tables\Columns\TextColumn::make('orderItems.quantity')
-                ->label('Quantity')
-                ->sortable(),
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('customer_name')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('customer_email')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('total_amount')
+                    ->money('IDR')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('product_names')
+                    ->label('Product')
+                    ->wrap()
+                    ->sortable(false),
+                Tables\Columns\TextColumn::make('orderItems.quantity')
+                    ->label('Quantity')
+                    ->sortable(),
+                Tables\Columns\BadgeColumn::make('status')
+                    ->colors([
+                        'warning' => 'pending',
+                        'success' => 'completed',
+                        'danger' => 'cancelled',
+                    ]),
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'completed' => 'Completed',
+                        'cancelled' => 'Cancelled',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
