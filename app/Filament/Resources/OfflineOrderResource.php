@@ -17,7 +17,7 @@ class OfflineOrderResource extends Resource
 {
     protected static ?string $model = OfflineOrder::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-calculator';
     protected static ?string $navigationGroup = 'Order';
     protected static ?string $navigationLabel = 'Kasir';
 

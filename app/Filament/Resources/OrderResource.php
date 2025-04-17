@@ -21,7 +21,7 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
     protected static ?string $navigationGroup = 'Order';
     protected static ?string $navigationLabel = 'Online Orders';
 
@@ -51,7 +51,7 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('customer_email')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('total_amount')
-                    ->money('IDR')
+                    ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('product_names')
                     ->label('Product')
