@@ -75,6 +75,9 @@
 
 <body>
 
+    <!-- Header -->
+    @include('order.header')
+
     <!-- Menu -->
     @yield('menu')
 
