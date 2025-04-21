@@ -25,7 +25,8 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->brandName('OrderYuk')
+            ->brandLogo(asset('images/logo-tuku-madang.png'))
+            ->brandLogoHeight('40px')
             ->id('admin')
             ->path('admin')
             ->login()
