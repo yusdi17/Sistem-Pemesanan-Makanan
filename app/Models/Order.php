@@ -17,8 +17,8 @@ class Order extends Model
         'customer_phone',
         'customer_address',
         'total_amount',
-        'status',
-        'payment_method',
+        'order_status',
+        'payment_status',
     ];
 
     public function user()

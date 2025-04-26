@@ -30,7 +30,6 @@ class CheckoutController extends Controller
             'customer_email' => 'required|email',
             'customer_phone' => 'required|string|max:20',
             'customer_address' => 'required|string',
-            'payment_method' => 'required|in:bank_transfer,COD',
         ]);
 
         $cart = session('cart', []);
@@ -50,9 +49,35 @@ class CheckoutController extends Controller
             'customer_phone' => $request->customer_phone,
             'customer_address' => $request->customer_address,
             'total_amount' => $totalAmount,
-            'payment_method' => $request->payment_method,
-            'status' => 'pending',
+            'order_status' => 'processing',
+            'payment_status' => 'pending',
         ]);
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = [
+            'transaction_details' => [
+                'order_id' => $order->id,
+                'gross_amount' => $totalAmount,
+            ],
+            'customer_details' => [
+                'first_name' => $order->customer_name,
+                'email' => $order->customer_email,
+                'phone' => $order->customer_phone,
+            ]
+        ];
+        
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        $order->snap_token = $snapToken;
+        $order->save();
 
         foreach ($cart as $productId => $item) {
             OrderItem::create([
@@ -63,11 +88,11 @@ class CheckoutController extends Controller
             ]);
         }
 
-        Mail::to($order->customer_email)->send(new InvoiceMail($order));
-        // Bersihkan keranjang
+        // Mail::to($order->customer_email)->send(new InvoiceMail($order));
+        // // Bersihkan keranjang
         session()->forget('cart');
 
-        return redirect()->route('checkout.success')->with('success', 'Pesanan berhasil dibuat!');
+        return view('checkout.payment', compact('order'));
     }
 
     public function create()
@@ -116,5 +141,4 @@ class CheckoutController extends Controller
 
         return response()->json(['cart' => $cart]);
     }
-
 }

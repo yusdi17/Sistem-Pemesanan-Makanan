@@ -77,18 +77,6 @@
                     Please enter your shipping address.
                   </div>
                 </div>
-    
-              <div class="col-12 mb-3">
-                <label for="payment_method" class="form-label">Metode Pembayaran</label>
-                <select class="form-select" id="payment_method" name="payment_method" required>
-                  <option value="" selected disabled>Pilih metode pembayaran</option>
-                  <option value="bank_transfer">Transfer Bank</option>
-                  <option value="COD">Bayar di Tempat (COD)</option>
-                </select>
-                <div class="invalid-feedback">
-                  Silakan pilih metode pembayaran.
-                </div>
-              </div>
               
     
               <hr class="my-4">
@@ -98,7 +86,6 @@
         </div>
     </div>
 </main>
-
 
   
   <footer class="my-5 pt-5 text-body-secondary text-center text-small">

@@ -70,18 +70,14 @@ class OrderItemResource extends Resource
                 ->money()
                 ->sortable(),
 
-            TextColumn::make('order.status')
+            TextColumn::make('order.order_status')
                 ->label('Status')
                 ->badge()
                 ->color(fn (string $state): string => match ($state) {
-                    'pending' => 'warning',
+                    'processing' => 'warning',
                     'completed' => 'success',
                     'cancelled' => 'danger',
                 }),
-
-            TextColumn::make('order.payment_method')
-                ->label('Payment Method')
-                ->sortable(),
 
             TextColumn::make('product.name')
                 ->numeric()

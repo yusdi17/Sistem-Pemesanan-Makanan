@@ -29,9 +29,9 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('status')
+                Select::make('order_status')
                     ->options([
-                        'pending' => 'Pending',
+                        'processing' => 'processing',
                         'completed' => 'Completed',
                         'cancelled' => 'Cancelled',
                     ])
@@ -60,17 +60,17 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('orderItems.quantity')
                     ->label('Quantity')
                     ->sortable(),
-                Tables\Columns\BadgeColumn::make('status')
+                Tables\Columns\BadgeColumn::make('order_status')
                     ->colors([
-                        'warning' => 'pending',
+                        'warning' => 'processing',
                         'success' => 'completed',
                         'danger' => 'cancelled',
                     ]),
             ])
             ->filters([
-                SelectFilter::make('status')
+                SelectFilter::make('order_status')
                     ->options([
-                        'pending' => 'Pending',
+                        'processing' => 'processing',
                         'completed' => 'Completed',
                         'cancelled' => 'Cancelled',
                     ]),

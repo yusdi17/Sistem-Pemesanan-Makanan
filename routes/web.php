@@ -6,6 +6,7 @@ use App\Exports\LaporanPenjualanExport;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\MidtransController;
 
 // Route::get('/', function () {
 //     return view('order.index');
@@ -45,3 +46,17 @@ Route::get('/laporan/export', function () {
     $periode = request()->get('periode', 'hari');
     return Excel::download(new LaporanPenjualanExport($periode), 'laporan-penjualan.xlsx');
 })->name('laporan.export');
+
+Route::get('/checkout/success', function () {
+    return view('checkout.success');
+})->name('checkout.success');
+
+Route::get('/checkout/pending', function () {
+    return view('checkout.pending');
+})->name('checkout.pending');
+
+Route::get('/checkout/failed', function () {
+    return view('checkout.failed');
+})->name('checkout.failed');
+
+Route::post('/midtrans/callback', [MidtransController::class, 'callback'])->name('midtrans.callback');
