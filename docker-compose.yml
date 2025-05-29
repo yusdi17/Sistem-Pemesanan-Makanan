@@ -1,0 +1,52 @@
+# version: '3.8'
+
+# services:
+#   app:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     image: laravel-app
+#     container_name: laravel-app
+#     restart: unless-stopped
+#     volumes:
+#       - ./:/var/www
+#     ports:
+#       - "9000:9000"
+#     networks:
+#       - laravel
+
+#   nginx:
+#     image: nginx:alpine
+#     container_name: laravel-nginx
+#     restart: unless-stopped
+#     ports:
+#       - "8000:80"
+#     volumes:
+#       - ./:/var/www
+#       - ./nginx/conf.d:/etc/nginx/conf.d
+#     depends_on:
+#       - app
+#     networks:
+#       - laravel
+
+#   mysql:
+#     image: mysql:8
+#     container_name: laravel-mysql
+#     restart: unless-stopped
+#     environment:
+#       MYSQL_ROOT_PASSWORD: root
+#       MYSQL_DATABASE: tuku_madang
+#       MYSQL_USER: laravel
+#       MYSQL_PASSWORD: laravel
+#     ports:
+#       - "3306:3306"
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+#     networks:
+#       - laravel
+
+# networks:
+#   laravel:
+
+# volumes:
+#   mysql_data:
