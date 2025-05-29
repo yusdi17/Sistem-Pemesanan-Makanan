@@ -7,8 +7,8 @@
       </a>
     </div>
     <div class="col-md-3 text-end">
-      <button type="button" class="btn btn-outline-primary me-2">Login</button>
-      <button type="button" class="btn btn-primary">Register</button>
+      <a href="{{ route('auth.login') }}"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
+      <a href="{{ route('auth.register') }}"><button type="button" class="btn btn-primary">Register</button></a>
     </div>
   </nav>
 
