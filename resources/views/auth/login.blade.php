@@ -12,18 +12,19 @@
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Login</h2>
 
-              <form>
+              <form method="POST" action="{{ route('login') }}">
+                @csrf
 
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" placeholder="Email"/>
+                  <input required type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" placeholder="Email"/>
                 </div>
 
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" placeholder="Password"/>
+                  <input required type="password" name="password" id="form3Example4cdg" class="form-control form-control-lg" placeholder="Password"/>
                 </div>
 
                 <div class="d-flex justify-content-center">
-                  <button  type="button" data-mdb-button-init
+                  <button type="submit" data-mdb-button-init
                     data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
                 </div>
 
@@ -39,3 +40,4 @@
     </div>
   </div>
 </section>
+@endsection

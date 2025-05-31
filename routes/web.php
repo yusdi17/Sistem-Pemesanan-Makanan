@@ -12,7 +12,11 @@ use App\Http\Controllers\MidtransController;
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/register', 'register')->name('auth.register');
-    Route::get('/login', 'login')->name('auth.login');
+    Route::get('/login', 'loginForm')->name('auth.login');
+    Route::post('/register', 'store')->name('register');
+    Route::get('/activate/{token}', 'activate')->name('auth.activate');
+    Route::post('/login', 'login')->name('login');
+    Route::get('/logout', 'logout')->name('logout');
 });
 
 Route::controller(OrderController::class)->group(function () {

@@ -12,33 +12,33 @@
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-              <form>
-
+              <form  method="POST" action="{{ route('register') }}">
+                @csrf
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Nama"/>
+                  <input type="text" id="nama" name="name" class="form-control form-control-lg" placeholder="Nama"/>
                 </div>
 
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" placeholder="Email"/>
+                  <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Email"/>
                 </div>
 
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="tel" id="form3Example4cg" class="form-control form-control-lg" placeholder="No WhatsApp"/>
+                  <input type="tel" id="wa" name="phone" class="form-control form-control-lg" placeholder="No WhatsApp"/>
                 </div>
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="text" id="form3Example4cg" class="form-control form-control-lg" placeholder="Alamat"/>
-                </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" id="form3Example4cg" class="form-control form-control-lg" placeholder="Password"/>
+                  <input type="text" id="alamat" name="alamat" class="form-control form-control-lg" placeholder="Alamat"/>
                 </div>
 
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" placeholder="Konfirmasi Password"/>
+                  <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Password"/>
+                </div>
+
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <input type="password" id="password_confirmation" name="password_confirmation" class="form-control form-control-lg" placeholder="Konfirmasi Password"/>
                 </div>
 
                 <div class="d-flex justify-content-center">
-                  <button  type="button" data-mdb-button-init
+                  <button  type="submit" data-mdb-button-init
                     data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                 </div>
 
@@ -54,4 +54,4 @@
     </div>
   </div>
 </section>
-@endsection
+
