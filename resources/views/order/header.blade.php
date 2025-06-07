@@ -4,7 +4,7 @@
         class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom d-none d-md-flex">
         <div class="col-md-3 mb-2 mb-md-0">
             <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-                <img class="bi" src="{{ asset('images/logo-tuku-madang.png') }}" alt="" srcset=""
+                <img class="bi" src="{{ asset('images/logo2.png') }}" alt="" srcset=""
                     height="40px">
             </a>
         </div>
@@ -16,8 +16,9 @@
                     <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownProfile">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
                     <li><a class="dropdown-item" href="#">Alamat</a></li>
+                    <li><a class="dropdown-item" href="#">Pesanan Saya</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <form action="{{ route('logout') }}" method="GET">
@@ -50,8 +51,12 @@
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                   @auth
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Hi, {{ Auth::user()->name }}</h5>
+                    <div class="d-flex flex-column">
+                        <h5 class="mb-0">Hi, {{ Auth::user()->name }}</h5>
+                        <small class="text-muted">Selamat datang kembali</small>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    
                     @else
                     <a href="{{ route('auth.login') }}"><button type="button"
                             class="btn btn-outline-primary me-2">Login</button></a>
@@ -61,8 +66,36 @@
                   @endauth
                 </div>
                 <div class="offcanvas-body">
+                  @auth
+                     <ul class="list-group list-group-flush w-100">
+                        <li class="list-group-item border-0 px-0">
+                            <a href="#" class="d-flex align-items-center text-decoration-none text-dark">
+                                <i class="bi bi-person me-2 fs-5"></i> Profil
+                            </a>
+                        </li>
+                        <li class="list-group-item border-0 px-0">
+                            <a href="#" class="d-flex align-items-center text-decoration-none text-dark">
+                                <i class="bi bi-geo-alt me-2 fs-5"></i> Alamat
+                            </a>
+                        </li>
+                        <li class="list-group-item border-0 px-0">
+                            <a href="#" class="d-flex align-items-center text-decoration-none text-dark">
+                                <i class="bi bi-cart me-2 fs-5"></i> Pesanan Saya
+                            </a>
+                        </li>
+                        <li class="list-group-item border-0 px-0">
+                            <form action="{{ route('logout') }}" method="POST" class="d-flex align-items-center">
+                                @csrf
+                                <button type="submit" class="btn btn-link text-danger d-flex align-items-center p-0">
+                                    <i class="bi bi-box-arrow-right me-2 fs-5"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                @endauth
                 </div>
             </div>
         </div>
     </nav>
+
 </div>

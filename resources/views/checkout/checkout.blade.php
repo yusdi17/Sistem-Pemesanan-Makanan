@@ -42,47 +42,91 @@
         {{-- FORM PEMESAN --}}
         <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Data Pemesan</h4>
+            @auth
             <form action="{{ route('checkout.store') }}" method="POST" class="needs-validation">
-                @csrf
-
-                <div class="row g-3">
-                <div class="col-sm-12">
-                  <label for="name" class="form-label">Nama pemesan</label>
-                  <input type="text" name="customer_name" class="form-control" id="firstName" placeholder="Masukkan nama anda" value="" required>
-                  <div class="invalid-feedback">
-                    Valid first name is required.
-                  </div>
-                </div>
+                    @csrf
     
-                <div class="col-12">
-                  <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
-                  <input type="email" name="customer_email" class="form-control" id="email" placeholder="contoh : you@gmail.com">
-                  <div class="invalid-feedback">
-                    Please enter a valid email address for shipping updates.
-                  </div>
-                </div>
-
-                <div class="col-12">
-                  <label for="tel" class="form-label">No WhatsApp <span class="text-body-secondary"></span></label>
-                  <input type="tel" name="customer_phone" class="form-control" id="tel" placeholder="Contoh : 082278907654">
-                  <div class="invalid-feedback">
-                    Please enter a valid email address for shipping updates.
-                  </div>
-                </div>
+                    <div class="row g-3">
+                    <div class="col-sm-12">
+                      <label for="name" class="form-label">Nama pemesan</label>
+                      <input type="text" name="customer_name" class="form-control" id="firstName" placeholder="Masukkan nama anda" value="{{ Auth::user()->name }}">
+                      <div class="invalid-feedback">
+                        Valid first name is required.
+                      </div>
+                    </div>
+        
+                    <div class="col-12">
+                      <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
+                      <input type="email" name="customer_email" class="form-control" id="email" placeholder="contoh : you@gmail.com" value="{{ Auth::user()->email }}">
+                      <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
+                      </div>
+                    </div>
     
-                <div class="col-12">
-                  <label for="address" class="form-label">Alamat</label>
-                  <input type="text" name="customer_address" class="form-control" id="address" placeholder="Contoh : Dusun Durian Runtuh, RT01/RW02, Desa Manggis, Kecamatan Timun, Kabupaten Jeruk" required>
-                  <div class="invalid-feedback">
-                    Please enter your shipping address.
-                  </div>
-                </div>
-              
+                    <div class="col-12">
+                      <label for="tel" class="form-label">No WhatsApp <span class="text-body-secondary"></span></label>
+                      <input type="tel" name="customer_phone" class="form-control" id="tel" placeholder="Contoh : 082278907654" value="{{ Auth::user()->phone }}">
+                      <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
+                      </div>
+                    </div>
+        
+                    <div class="col-12">
+                      <label for="address" class="form-label">Alamat</label>
+                      <input type="text" name="customer_address" class="form-control" id="address" placeholder="Contoh : Dusun Durian Runtuh, RT01/RW02, Desa Manggis, Kecamatan Timun, Kabupaten Jeruk" required value="{{ Auth::user()->alamat }}">
+                      <div class="invalid-feedback">
+                        Please enter your shipping address.
+                      </div>
+                    </div>
+                  
+        
+                  <hr class="my-4">
     
-              <hr class="my-4">
-
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Lanjut Checkout</button>
-            </form>
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Bayar</button>
+                </form>
+                @else
+                <form action="{{ route('checkout.store') }}" method="POST" class="needs-validation">
+                    @csrf
+    
+                    <div class="row g-3">
+                    <div class="col-sm-12">
+                      <label for="name" class="form-label">Nama pemesan</label>
+                      <input type="text" name="customer_name" class="form-control" id="firstName" placeholder="Masukkan nama anda" value="" required>
+                      <div class="invalid-feedback">
+                        Valid first name is required.
+                      </div>
+                    </div>
+        
+                    <div class="col-12">
+                      <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
+                      <input type="email" name="customer_email" class="form-control" id="email" placeholder="contoh : you@gmail.com">
+                      <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
+                      </div>
+                    </div>
+    
+                    <div class="col-12">
+                      <label for="tel" class="form-label">No WhatsApp <span class="text-body-secondary"></span></label>
+                      <input type="tel" name="customer_phone" class="form-control" id="tel" placeholder="Contoh : 082278907654">
+                      <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
+                      </div>
+                    </div>
+        
+                    <div class="col-12">
+                      <label for="address" class="form-label">Alamat</label>
+                      <input type="text" name="customer_address" class="form-control" id="address" placeholder="Contoh : Dusun Durian Runtuh, RT01/RW02, Desa Manggis, Kecamatan Timun, Kabupaten Jeruk" required>
+                      <div class="invalid-feedback">
+                        Please enter your shipping address.
+                      </div>
+                    </div>
+                  
+        
+                  <hr class="my-4">
+    
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Lanjut Checkout</button>
+                </form>
+            @endauth
         </div>
     </div>
 </main>

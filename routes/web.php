@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
 use App\Exports\LaporanPenjualanExport;
@@ -9,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\MidtransController;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/register', 'register')->name('auth.register');
@@ -55,3 +57,6 @@ Route::get('/checkout/failed', function () {
 })->name('checkout.failed');
 
 Route::post('/midtrans/callback', [MidtransController::class, 'callback'])->name('midtrans.callback');
+Route::middleware(Auth::class)->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+});
