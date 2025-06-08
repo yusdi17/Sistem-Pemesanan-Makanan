@@ -26,7 +26,7 @@
                   <input type="tel" id="wa" name="phone" class="form-control form-control-lg" placeholder="No WhatsApp"/>
                 </div>
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="text" id="alamat" name="alamat" class="form-control form-control-lg" placeholder="Alamat"/>
+                  <input type="text" id="alamat" name="alamat" class="form-control form-control-lg" placeholder="Alamat Lengkap"/>
                 </div>
 
                 <div data-mdb-input-init class="form-outline mb-4">

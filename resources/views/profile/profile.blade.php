@@ -8,8 +8,9 @@
       <div class="col">
         <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
           <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a style="text-decoration: none;" href="/">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            <li class=" mb-0 ms-auto"><a href="{{ route('profile.edit') }}">Edit Profile</a></li>
           </ol>
         </nav>
       </div>
