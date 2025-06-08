@@ -10,7 +10,7 @@
           <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a style="text-decoration: none;" href="/">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">User Profile</li>
-            <li class=" mb-0 ms-auto"><a href="{{ route('profile.edit') }}">Edit Profile</a></li>
+            <li class=" mb-0 ms-auto"><a style="text-decoration: none;" href="{{ route('profile.edit') }}">Edit Profile</a></li>
           </ol>
         </nav>
       </div>
