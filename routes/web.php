@@ -61,4 +61,7 @@ Route::middleware(Auth::class)->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+    // Pesan
+    Route::get('/pesanan-saya', [OrderController::class, 'show'])->name('pesanan.saya');
 });

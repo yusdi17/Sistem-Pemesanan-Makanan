@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -31,6 +32,14 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        dd([
+    'check' => Auth::check(),
+    'user' => Auth::user(),
+    'id' => Auth::id(),
+]);
+
+        $user = Auth::user();
+
         $request->validate([
             'customer_name' => 'required|string',
             'customer_email' => 'required|email',
@@ -43,7 +52,7 @@ class OrderController extends Controller
         $total = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
     
         $order = Order::create([
-            'user_id' => auth()->id(),
+            'user_id' => $user ? $user->id : null,
             'customer_name' => $request->customer_name,
             'customer_email' => $request->customer_email,
             'customer_phone' => $request->customer_phone,
@@ -71,9 +80,9 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        return view('pesanan.pesanan');
     }
 
     /**

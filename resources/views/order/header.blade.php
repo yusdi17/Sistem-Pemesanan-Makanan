@@ -17,8 +17,8 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownProfile">
                     <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Alamat</a></li>
-                    <li><a class="dropdown-item" href="#">Pesanan Saya</a></li>
+                    <li><a class="dropdown-item" href="{{ route('pesanan.saya') }}">Pesanan Saya</a></li>
+                    <li><a class="dropdown-item" href="#">Pengaturan</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <form action="{{ route('logout') }}" method="GET">
@@ -40,7 +40,7 @@
     <nav class="navbar border-bottom d-block d-md-none">
         <div class="container-fluid">
             <a href="/" class="navbar-brand d-inline-flex link-body-emphasis text-decoration-none">
-                <img class="bi" src="{{ asset('images/logo-tuku-madang.png') }}" alt="" srcset=""
+                <img class="bi" src="{{ asset('images/logo2.png') }}" alt="" srcset=""
                     height="30px">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -69,18 +69,18 @@
                   @auth
                      <ul class="list-group list-group-flush w-100">
                         <li class="list-group-item border-0 px-0">
-                            <a href="#" class="d-flex align-items-center text-decoration-none text-dark">
+                            <a href="{{ route('profile') }}" class="d-flex align-items-center text-decoration-none text-dark">
                                 <i class="bi bi-person me-2 fs-5"></i> Profil
                             </a>
                         </li>
                         <li class="list-group-item border-0 px-0">
-                            <a href="#" class="d-flex align-items-center text-decoration-none text-dark">
-                                <i class="bi bi-geo-alt me-2 fs-5"></i> Alamat
+                            <a href="{{ route('pesanan.saya') }}" class="d-flex align-items-center text-decoration-none text-dark">
+                                <i class="bi bi-cart me-2 fs-5"></i> Pesanan Saya
                             </a>
                         </li>
                         <li class="list-group-item border-0 px-0">
                             <a href="#" class="d-flex align-items-center text-decoration-none text-dark">
-                                <i class="bi bi-cart me-2 fs-5"></i> Pesanan Saya
+                                <i class="bi bi-gear me-2 fs-5"></i> Pengaturan
                             </a>
                         </li>
                         <li class="list-group-item border-0 px-0">
