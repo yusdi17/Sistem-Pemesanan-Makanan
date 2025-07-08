@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\MidtransController;
+use App\Http\Controllers\PesananController;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 Route::controller(AuthController::class)->group(function () {
@@ -63,5 +64,5 @@ Route::middleware(Auth::class)->group(function () {
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
     // Pesan
-    Route::get('/pesanan-saya', [OrderController::class, 'show'])->name('pesanan.saya');
+    Route::get('/pesanan-saya', [PesananController::class, 'index'])->name('pesanan.saya');
 });
