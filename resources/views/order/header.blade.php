@@ -4,7 +4,7 @@
         class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom d-none d-md-flex">
         <div class="col-md-3 mb-2 mb-md-0">
             <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-                <img class="bi" src="{{ asset('images/logo2.png') }}" alt="" srcset=""
+                <img class="bi" src="{{ asset('images/logo-tuku-madang.png') }}" alt="" srcset=""
                     height="40px">
             </a>
         </div>
