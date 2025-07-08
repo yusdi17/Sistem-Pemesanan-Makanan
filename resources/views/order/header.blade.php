@@ -84,7 +84,7 @@
                             </a>
                         </li>
                         <li class="list-group-item border-0 px-0">
-                            <form action="{{ route('logout') }}" method="POST" class="d-flex align-items-center">
+                            <form action="{{ route('logout') }}" method="GET" class="d-flex align-items-center">
                                 @csrf
                                 <button type="submit" class="btn btn-link text-danger d-flex align-items-center p-0">
                                     <i class="bi bi-box-arrow-right me-2 fs-5"></i> Logout
