@@ -40,7 +40,7 @@
     <nav class="navbar border-bottom d-block d-md-none">
         <div class="container-fluid">
             <a href="/" class="navbar-brand d-inline-flex link-body-emphasis text-decoration-none">
-                <img class="bi" src="{{ asset('images/logo2.png') }}" alt="" srcset=""
+                <img class="bi" src="{{ asset('images/logo-tuku-madang.png') }}" alt="" srcset=""
                     height="30px">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
