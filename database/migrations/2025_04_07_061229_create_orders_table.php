@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('customer_phone');
             $table->string('customer_address');
             $table->decimal('total_amount', 10, 2);
-            $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
-            $table->enum('payment_method', ['bank_transfer', 'COD']);
+            $table->enum('order_status', ['pending', 'completed', 'cancelled'])->default('pending');
+            $table->enum('payment_status', ['pending', 'paid', 'cancelled'])->default('pending');
             $table->timestamps();
         });
     }
