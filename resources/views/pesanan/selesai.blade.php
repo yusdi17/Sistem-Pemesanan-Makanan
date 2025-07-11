@@ -1,5 +1,5 @@
 @extends('profile.index')
-@section('title', 'Pesanan Saya')
+@section('title', 'Pesanan Selesai')
 
 @section('content')
     <section style="background-color: #eee;">
@@ -9,8 +9,8 @@
                     <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
                         <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item"><a style="text-decoration: none;" href="/">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Pesanan Saya</li>
-                            <li class="breadcrumb-item"><a style="text-decoration: none;" href="/pesanan-selesai">Pesanan Selesai</a></li>
+                            <li class="breadcrumb-item"><a style="text-decoration: none;" href="/pesanan-saya">Pesanan Saya</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Pesanan Selesai</li>
                             <li class="breadcrumb-item"><a style="text-decoration: none;" href="#">Pesanan Dibatalkan</a></li>
                         </ol>
                     </nav>
@@ -26,7 +26,7 @@
                                     <div class="card-body p-4">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex flex-column">
-                                                <span class="lead fw-normal">Pesanan dalam proses</span>
+                                                <span class="lead fw-normal">Pesanan selesai</span>
                                                 <span class="text-muted small">
                                                     {{ \Carbon\Carbon::parse($order->created_at)->translatedFormat('d F Y') }}
                                                 </span>
@@ -35,7 +35,7 @@
                                                 <button type="button" class="btn btn-outline-primary"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal{{ $order->id }}">
-                                                    Cek Pesanan
+                                                    Detail
                                                 </button>
                                             </div>
                                         </div>
@@ -85,16 +85,6 @@
                                     <p class="fw-bold">Total</p>
                                     <p class="fw-bold">Rp{{ number_format($order->total_amount, 0, ',', '.') }}</p>
                                 </div>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center border-top-0 py-4">
-                                <form action="{{ route('orders.selesai', $order->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary btn-lg mb-1"
-                                        style="background-color: #35558a;">
-                                        Pesanan Selesai
-                                    </button>
-                                </form>
-
                             </div>
                         </div>
                     </div>
