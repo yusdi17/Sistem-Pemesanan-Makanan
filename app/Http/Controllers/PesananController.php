@@ -37,4 +37,15 @@ class PesananController extends Controller
             ->get();
        return view('pesanan.selesai', compact('orders'));
     }
+
+    public function pesananGagal()
+    {
+        $user = Auth::user();
+
+        $orders = Order::with(['items.product']) 
+            ->where('order_status', 'cancelled')
+            ->where('user_id', $user->id)
+            ->get();
+        return view('pesanan.dibatalkan', compact('orders'));
+    }
 }
