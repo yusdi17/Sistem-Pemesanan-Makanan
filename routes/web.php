@@ -67,5 +67,6 @@ Route::middleware(Auth::class)->group(function () {
     Route::get('/pesanan-saya', [PesananController::class, 'index'])->name('pesanan.saya');
     Route::post('/pesanan/{order}/selesai', [PesananController::class, 'markAsCompleted'])->name('orders.selesai');
     Route::get('/pesanan-selesai', [PesananController::class, 'pesananSelesai'])->name('pesanan.selesai');
+    Route::get('/cancelled', [PesananController::class, 'pesananGagal'])->name('pesanan.gagal');
 
 });
