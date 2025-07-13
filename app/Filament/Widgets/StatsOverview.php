@@ -15,10 +15,10 @@ class StatsOverview extends BaseWidget
         $jumlahProduk = Product::count();
 
         $produkTerjual = OrderItem::whereHas('order', function ($query) {
-            $query->where('status', 'completed');
+            $query->where('order_status', 'completed');
         })->sum('quantity');
     
-        $pendapatan = Order::where('status', 'completed')->sum('total_amount');
+        $pendapatan = Order::where('order_status', 'completed')->sum('total_amount');
     
         return [
             Stat::make('Jumlah Produk', $jumlahProduk),
